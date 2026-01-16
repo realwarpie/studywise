@@ -440,6 +440,15 @@ html.dark-mode {
       color: white;
     }
 
+    .feature:hover .feature-icon svg {
+      stroke: white;
+      color: white;
+    }
+
+    html.dark-mode .feature:hover .feature-icon {
+      color: white;
+    }
+
     .feature h3 {
       font-size: 18px;
       font-weight: 600;
@@ -504,7 +513,12 @@ html.dark-mode {
     .step:hover .step-num {
       transform: scale(1.15);
       background: var(--accent);
+      color: #fff;
       box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+    }
+
+    html.dark-mode .step:hover .step-num {
+      color: #fff;
     }
 
     .step h4 {
