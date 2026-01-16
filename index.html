@@ -1,0 +1,1122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>StudyWise — Better Notes. Better Grades.</title>
+  <meta name="description" content="Transform your messy lecture notes into study guides and quizzes. No nonsense. Privacy first." />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+  --bg-primary: #fafafa;
+  --bg-secondary: #f3f4f6;
+  --bg-tertiary: #eef2ff;
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  --border: #e5e7eb;
+
+  --accent: #6366f1;
+  --accent-bg: #eef2ff;
+
+  --cta-bg: #0f172a;
+  --button-hover: #1e293b;
+
+  --transition: all 0.25s ease;
+}
+
+html.dark-mode {
+  --bg-primary: #0b0f19;
+  --bg-secondary: #111827;
+  --bg-tertiary: #1e293b;
+
+  --text-primary: #e5e7eb;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+
+  --border: #1f2937;
+
+  --accent: #818cf8;
+  --accent-bg: #1e293b;
+
+  --cta-bg: #020617;
+  --button-hover: #818cf8;
+}
+
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html, body { height: 100%; }
+    
+    body {
+      font-family: 'Syne', system-ui, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: var(--transition);
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+    header {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: var(--bg-primary);
+      z-index: 50;
+      backdrop-filter: blur(8px);
+      animation: slideDown 0.4s ease-out;
+      transition: var(--transition);
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .header-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo { 
+      font-size: 24px; 
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    nav {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--text-primary); }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+
+    nav a:hover::after { width: 100%; }
+
+    .theme-toggle {
+      background: transparent;
+      border: 2px solid var(--border);
+      color: var(--text-primary);
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+      transition: all 0.3s;
+      margin-left: 16px;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .download-btn {
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+      transition: all 0.3s;
+    }
+
+    html.dark-mode .download-btn {
+      background: var(--accent);
+      color: #000;
+    }
+
+    .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .container { padding: 0 24px; }
+    }
+
+    section { padding: 100px 0; border-bottom: 1px solid var(--border); }
+    section:last-of-type { border-bottom: none; }
+
+    .hero-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: 64px;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .hero-highlight {
+      background: var(--accent);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 32px;
+      max-width: 520px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 32px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: #000;
+      color: #fff;
+    }
+
+    html.dark-mode .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--button-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    html.dark-mode .btn-primary:hover {
+      background: var(--button-hover);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #000;
+      border: 2px solid #000;
+    }
+
+    html.dark-mode .btn-secondary {
+      background: transparent;
+      color: var(--text-primary);
+      border: 2px solid var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+      background: #000;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    html.dark-mode .btn-secondary:hover {
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
+    }
+
+    .hero-visual {
+      background: linear-gradient(135deg, #fff9f0 0%, #ffe8d6 100%);
+      border-radius: 12px;
+      padding: 40px;
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    html.dark-mode .hero-visual {
+      background: linear-gradient(135deg, #1f2936 0%, #2a3f5f 100%);
+    }
+
+    .mock-window {
+      width: 100%;
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      animation: scaleIn 0.6s ease-out 0.2s backwards;
+    }
+
+    html.dark-mode .mock-window {
+      background: var(--bg-secondary);
+    }
+
+    @keyframes scaleIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .mock-header {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .mock-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ddd;
+      animation: pop 0.5s ease-out backwards;
+    }
+
+    html.dark-mode .mock-dot {
+      background: #444;
+    }
+
+    .mock-dot:nth-child(1) { animation-delay: 0.3s; }
+    .mock-dot:nth-child(2) { animation-delay: 0.4s; }
+    .mock-dot:nth-child(3) { animation-delay: 0.5s; }
+
+    @keyframes pop {
+      from { transform: scale(0); }
+      to { transform: scale(1); }
+    }
+
+    .mock-bar {
+      height: 8px;
+      background: var(--accent);
+      border-radius: 4px;
+      margin-bottom: 16px;
+      width: 60%;
+      animation: slideInLeft 0.5s ease-out 0.4s backwards;
+    }
+
+    @keyframes slideInLeft {
+      from { transform: translateX(-20px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    .mock-line {
+      height: 6px;
+      background: #f0f0f0;
+      border-radius: 3px;
+      margin-bottom: 12px;
+      animation: slideInLeft 0.5s ease-out backwards;
+    }
+
+    html.dark-mode .mock-line {
+      background: #333;
+    }
+
+    .mock-line:nth-child(1) { animation-delay: 0.5s; }
+    .mock-line:nth-child(2) { animation-delay: 0.6s; }
+    .mock-line:nth-child(3) { animation-delay: 0.7s; }
+
+    .mock-line.short { width: 40%; }
+    .mock-line.long { width: 95%; }
+
+    @media (max-width: 1024px) {
+      .hero-wrapper { grid-template-columns: 1fr; gap: 48px; }
+      .hero h1 { font-size: 48px; }
+      section { padding: 60px 0; }
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #999;
+      margin-bottom: 16px;
+      animation: fadeInUp 0.5s ease-out;
+    }
+
+    h2 {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 32px;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      animation: fadeInUp 0.5s ease-out 0.1s backwards;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .feature {
+      padding: 32px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      animation: fadeInUp 0.6s ease-out backwards;
+    }
+
+    html.dark-mode .feature {
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+    }
+
+    .feature:nth-child(1) { animation-delay: 0s; }
+    .feature:nth-child(2) { animation-delay: 0.1s; }
+    .feature:nth-child(3) { animation-delay: 0.2s; }
+    .feature:nth-child(4) { animation-delay: 0.3s; }
+    .feature:nth-child(5) { animation-delay: 0.4s; }
+    .feature:nth-child(6) { animation-delay: 0.5s; }
+
+    .feature:hover {
+      border-color: var(--accent);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(99, 102, 241, 0.18);
+    }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #fff0e6 0%, #ffe0cc 100%);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 24px;
+      transition: all 0.3s;
+    }
+
+    html.dark-mode .feature-icon {
+      background: linear-gradient(135deg, var(--accent-bg) 0%, #253d52 100%);
+    }
+
+    .feature:hover .feature-icon {
+      transform: scale(1.1) rotate(5deg);
+      background: var(--accent);
+      color: white;
+    }
+
+    .feature h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .feature p {
+      color: #666;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    html.dark-mode .feature p {
+      color: var(--text-secondary);
+    }
+
+    @media (max-width: 768px) {
+      .features-grid { grid-template-columns: 1fr; }
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+      position: relative;
+    }
+
+    .step {
+      text-align: center;
+      position: relative;
+      animation: fadeInUp 0.6s ease-out backwards;
+    }
+
+    .step:nth-child(1) { animation-delay: 0s; }
+    .step:nth-child(2) { animation-delay: 0.1s; }
+    .step:nth-child(3) { animation-delay: 0.2s; }
+    .step:nth-child(4) { animation-delay: 0.3s; }
+    .step:nth-child(5) { animation-delay: 0.4s; }
+
+    .step-num {
+      width: 44px;
+      height: 44px;
+      background: #1a1a1a;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      margin: 0 auto 16px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    html.dark-mode .step-num {
+      background: var(--bg-secondary);
+      color: var(--accent);
+      box-shadow: 0 4px 12px rgba(129, 140, 248, 0.2);
+    }
+
+    .step:hover .step-num {
+      transform: scale(1.15);
+      background: var(--accent);
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+    }
+
+    .step h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      font-size: 13px;
+      color: #999;
+      line-height: 1.6;
+    }
+
+    html.dark-mode .step p {
+      color: var(--text-muted);
+    }
+
+    .step::after {
+      content: '→';
+      position: absolute;
+      right: -16px;
+      top: 22px;
+      color: #ddd;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    html.dark-mode .step::after {
+      color: var(--border);
+    }
+
+    .step:last-child::after { display: none; }
+
+    @media (max-width: 1024px) {
+      .process-grid { grid-template-columns: repeat(2, 1fr); }
+      .step::after { display: none; }
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      margin-top: 48px;
+    }
+
+    .why-content {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .why-grid h2 { margin-bottom: 32px; animation: none; }
+
+    .reasons {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .reason {
+      display: flex;
+      gap: 20px;
+      animation: fadeInUp 0.6s ease-out backwards;
+    }
+
+    .reason:nth-child(1) { animation-delay: 0.1s; }
+    .reason:nth-child(2) { animation-delay: 0.2s; }
+    .reason:nth-child(3) { animation-delay: 0.3s; }
+    .reason:nth-child(4) { animation-delay: 0.4s; }
+
+    .reason-check {
+      color: var(--accent);
+      font-size: 20px;
+      font-weight: 700;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+    }
+
+    .reason h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .reason p {
+      color: #666;
+      font-size: 14px;
+    }
+
+    html.dark-mode .reason p {
+      color: var(--text-secondary);
+    }
+
+    .why-visual {
+      background: linear-gradient(135deg, #fff9f0, #ffe8d6);
+      border-radius: 12px;
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.6s ease-out 0.1s backwards;
+    }
+
+    html.dark-mode .why-visual {
+      background: linear-gradient(135deg, var(--bg-secondary), #2a3f5f);
+    }
+
+    .visual-graphic {
+      font-size: 120px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @media (max-width: 1024px) {
+      .why-grid { grid-template-columns: 1fr; gap: 48px; }
+      .why-visual { min-height: 300px; }
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .faq {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s;
+      animation: fadeInUp 0.6s ease-out backwards;
+    }
+
+    html.dark-mode .faq {
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+    }
+
+    .faq:nth-child(1) { animation-delay: 0s; }
+    .faq:nth-child(2) { animation-delay: 0.1s; }
+    .faq:nth-child(3) { animation-delay: 0.2s; }
+    .faq:nth-child(4) { animation-delay: 0.3s; }
+    .faq:nth-child(5) { animation-delay: 0.4s; }
+    .faq:nth-child(6) { animation-delay: 0.5s; }
+
+    .faq:hover {
+      border-color: var(--accent);
+      box-shadow: 0 8px 20px rgba(255, 107, 53, 0.1);
+    }
+
+    .faq-header {
+      padding: 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      transition: background 0.2s;
+      font-weight: 600;
+    }
+
+    .faq-header:hover { background: #f5f5f5; }
+
+    html.dark-mode .faq-header:hover {
+      background: var(--bg-tertiary);
+    }
+
+    .faq-toggle {
+      color: #999;
+      font-size: 18px;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .faq.active .faq-toggle { transform: rotate(180deg); }
+
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      padding: 0 20px;
+    }
+
+    .faq.active .faq-content {
+      max-height: 200px;
+      padding: 0 20px 20px;
+    }
+
+    .faq-text {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    html.dark-mode .faq-text {
+      color: var(--text-secondary);
+    }
+
+    @media (max-width: 768px) {
+      .faq-grid { grid-template-columns: 1fr; }
+    }
+
+    .cta {
+      background: #1a1a1a;
+      color: #fff;
+      padding: 80px;
+      border-radius: 12px;
+      text-align: center;
+      margin: 80px 0;
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    html.dark-mode .cta {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+    }
+
+    .cta h2 {
+      color: #fff;
+      margin-bottom: 16px;
+      animation: none;
+    }
+
+    html.dark-mode .cta h2 {
+      color: var(--text-primary);
+    }
+
+    .cta p {
+      color: #bbb;
+      font-size: 18px;
+      margin-bottom: 32px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    html.dark-mode .cta p {
+      color: var(--text-secondary);
+    }
+
+    .btn-white {
+      background: #fff;
+      color: #000;
+      padding: 14px 32px;
+      border-radius: 6px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+
+    html.dark-mode .btn-white {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-white:hover {
+      background: #f0f0f0;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    html.dark-mode .btn-white:hover {
+      background: var(--button-hover);
+    }
+
+    @media (max-width: 768px) {
+      .cta { padding: 48px 24px; }
+      .cta h2 { font-size: 36px; }
+    }
+
+    footer {
+      padding: 48px 0;
+      text-align: center;
+      color: #999;
+      font-size: 13px;
+      border-top: 1px solid #e0e0e0;
+      animation: fadeInUp 0.6s ease-out;
+      transition: var(--transition);
+    }
+
+    html.dark-mode footer {
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    svg {
+      color: var(--accent);
+      stroke: currentColor;
+      fill: none;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: slideUp 0.6s ease-out forwards;
+      opacity: 0;
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-wrapper">
+        <div class="logo">StudyWise</div>
+        <nav>
+          <a href="#features">Features</a>
+          <a href="#process">Process</a>
+          <a href="#faq">FAQ</a>
+          <button class="theme-toggle" onclick="document.documentElement.classList.toggle('dark-mode'); localStorage.setItem('theme', document.documentElement.classList.contains('dark-mode') ? 'dark' : 'light');">🌙</button>
+          <button class="download-btn">Download</button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section>
+    <div class="container">
+      <div class="hero-wrapper">
+        <div class="fade-in">
+          <h1>Better notes,<br><span class="hero-highlight">better grades</span></h1>
+          <p>Stop fighting with messy PDFs and scribbled lecture notes. Upload anything. We clean it up, organize it, and turn it into actual study materials in seconds.</p>
+          <div class="hero-buttons">
+            <button class="btn btn-primary">Download</button>
+            <button class="btn btn-secondary">Learn more</button>
+          </div>
+        </div>
+        <div class="hero-visual fade-in delay-1">
+          <div class="mock-window">
+            <div class="mock-header">
+              <div class="mock-dot"></div>
+              <div class="mock-dot"></div>
+              <div class="mock-dot"></div>
+            </div>
+            <div class="mock-bar"></div>
+            <div class="mock-line long"></div>
+            <div class="mock-line short"></div>
+            <div class="mock-line long" style="width: 70%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="container">
+      <div class="section-label">What you get</div>
+      <h2>Everything you need to ace your exams</h2>
+      <div class="features-grid">
+        <div class="feature">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          </div>
+          <h3>Smart parsing</h3>
+          <p>Upload PDFs, images, or Word docs. Automatic OCR handles scanned pages. Clean extraction in seconds.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          </div>
+          <h3>AI summaries</h3>
+          <p>Pick any LLM. Get organized, concise study notes from chaotic lecture materials instantly.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          </div>
+          <h3>Auto quizzes</h3>
+          <p>Generate practice questions and flashcard decks automatically. Find weak areas fast.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          </div>
+          <h3>Your privacy</h3>
+          <p>Runs locally by default. Your files stay on your machine unless you choose a cloud LLM.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+          </div>
+          <h3>Flexible LLM</h3>
+          <p>OpenAI, Gemini, local Llama—pick whatever you want. Never locked into one provider.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5"></path><path d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8"></path></svg>
+          </div>
+          <h3>Export free</h3>
+          <p>Markdown, JSON, Anki decks, Notion, Obsidian. Use your notes in any tool you prefer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="container">
+      <div class="section-label">How it works</div>
+      <h2>5 simple steps</h2>
+      <div class="process-grid">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h4>Upload</h4>
+          <p>Drop your notes, PDFs, or images anywhere</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h4>Parse</h4>
+          <p>Auto-detect scans and extract all text</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h4>Clean</h4>
+          <p>Polish and organize into readable sections</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h4>Generate</h4>
+          <p>AI creates summaries, quizzes, and guides</p>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <h4>Export</h4>
+          <p>Download and use in your favorite app</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section>
+    <div class="container">
+      <div class="why-grid">
+        <div class="why-content">
+          <h2>Built for real students</h2>
+          <div class="reasons">
+            <div class="reason">
+              <div class="reason-check">✓</div>
+              <div>
+                <h4>Privacy first</h4>
+                <p>Everything runs locally. Your study materials are yours alone.</p>
+              </div>
+            </div>
+            <div class="reason">
+              <div class="reason-check">✓</div>
+              <div>
+                <h4>No nonsense</h4>
+                <p>No accounts, no logins, no weird subscriptions. Download and go.</p>
+              </div>
+            </div>
+            <div class="reason">
+              <div class="reason-check">✓</div>
+              <div>
+                <h4>Fast as hell</h4>
+                <p>From messy notes to polished study pack in literally seconds.</p>
+              </div>
+            </div>
+            <div class="reason">
+              <div class="reason-check">✓</div>
+              <div>
+                <h4>Works everywhere</h4>
+                <p>Export to Anki, Notion, Obsidian—whatever tools you use daily.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="why-visual">
+          <div class="visual-graphic">🚀</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-label">Questions</div>
+      <h2>Asked a lot</h2>
+      <div class="faq-grid">
+        <div class="faq">
+          <div class="faq-header">
+            <span>Completely offline?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-content">
+            <p class="faq-text">Yes. Runs 100% locally by default. You only need internet if you pick a cloud LLM. OCR and everything else? Totally offline.</p>
+          </div>
+        </div>
+        <div class="faq">
+          <div class="faq-header">
+            <span>Which LLMs work?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-content">
+            <p class="faq-text">Any LLM. OpenAI, Gemini, local Llama, Mistral—whatever you want. Bring your own, we don't force anything.</p>
+          </div>
+        </div>
+        <div class="faq">
+          <div class="faq-header">
+            <span>What file types?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-content">
+            <p class="faq-text">PDF (text or scanned), PNG/JPEG images, DOCX files. Batch uploads are supported. All processed the same way.</p>
+          </div>
+        </div>
+        <div class="faq">
+          <div class="faq-header">
+            <span>Data safety?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-content">
+            <p class="faq-text">Your files stay on your machine. We never upload or store anything unless you explicitly send data to a cloud LLM.</p>
+          </div>
+        </div>
+        <div class="faq">
+          <div class="faq-header">
+            <span>Export to Anki?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-content">
+            <p class="faq-text">Yes. Markdown, JSON, native Anki decks, Notion, Obsidian—pick whatever format you need.</p>
+          </div>
+        </div>
+        <div class="faq">
+          <div class="faq-header">
+            <span>Cost?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-content">
+            <p class="faq-text">Free. Download and use it. No hidden costs or trials. Cloud LLMs? You pay them directly, not us.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section>
+    <div class="container">
+      <div class="cta fade-in">
+        <h2>Ready?</h2>
+        <p>Download StudyWise for Windows. No sign-ups. No trials. Just better notes and better grades.</p>
+        <button class="btn-white">Download Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Built by Ashwin for DUHacks 5.0. © 2026 StudyWise</p>
+  </footer>
+
+  <script>
+    // Dark mode toggle
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Set dark mode by default
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark) || !savedTheme) {
+      document.documentElement.classList.add('dark-mode');
+    }
+
+    // FAQ Toggle
+    document.querySelectorAll('.faq').forEach(item => {
+      item.querySelector('.faq-header').addEventListener('click', () => {
+        document.querySelectorAll('.faq').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+      });
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const href = a.getAttribute('href');
+        if (href !== '#') {
+          e.preventDefault();
+          const el = document.querySelector(href);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Year
+    document.querySelectorAll('footer p').forEach(p => {
+      p.innerHTML = p.innerHTML.replace('2026', new Date().getFullYear());
+    });
+  </script>
+</body>
+</html>
