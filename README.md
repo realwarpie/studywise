@@ -1,80 +1,147 @@
+---
+
 # StudyWise
 
-StudyWise is a local-first application that converts **normal and scanned PDFs** into structured summaries, generated quizzes, and a short study plan.
+StudyWise is a **local-first Windows application** that helps students turn their study material into **exam-ready questions and revision content** using language models of their choice.
 
-It is designed for real academic material - including scanned lecture notes and handouts - where most summarization tools fail.
-
----
-
-## Overview
-
-StudyWise accepts a PDF, automatically detects whether it contains selectable text or scanned images, applies OCR when required, and processes the content page-by-page using a local language model.
-
-Each page is summarized independently to preserve structure and context. The generated notes are then used to create quiz questions and a simple adaptive study plan.
+It is built for real academic workflows — lecture notes, handouts, and documents — with a strong focus on **privacy, control, and clarity**.
 
 ---
 
-## Key Features
+## What StudyWise Does
 
-- Supports **both text-based and scanned PDFs**
-- Automatic scanned-page detection
-- OCR-based text extraction using Tesseract
-- Page-wise summarization for better structure
-- Quiz generation from extracted notes
-- Simple adaptive study plan
-- Local LLM support (privacy-first)
-- Clean Streamlit-based interface
+StudyWise ingests study material (PDF, DOCX, or text), extracts and cleans the content, and then uses a **user-connected LLM** (cloud or local) to generate **useful study outputs** such as exam-style questions.
+
+The application runs locally on Windows.
+No accounts. No forced models. No data upload.
 
 ---
 
-## Architecture
+## Core Features
 
-1. PDF ingestion and page analysis  
-2. Text extraction  
-   - Direct text extraction for normal PDFs  
-   - OCR fallback for scanned pages  
-3. Text chunking with size limits  
-4. Page-level summarization using a local LLM  
-5. Downstream quiz and study plan generation  
-6. Presentation through a lightweight UI
+* **Windows desktop application** (offline-first)
+* Supports:
+
+  * Text-based PDFs
+  * Scanned PDFs (OCR fallback)
+  * DOCX
+  * Plain text
+* Automatic detection of scanned pages
+* OCR using Tesseract (local)
+* Clean text normalization and chunking
+* **LLM-agnostic design**
+
+  * Cloud providers (OpenAI, Gemini, Anthropic, etc.)
+  * Local models (Ollama, LM Studio, llama.cpp)
+* Exam-style question generation:
+
+  * MCQs
+  * Short-answer questions
+  * Long-answer questions
+* Simple, distraction-free UI
+* Privacy-first: all processing stays on the user’s machine
+
+---
+
+## What StudyWise Is *Not*
+
+* Not a hosted SaaS
+* Not a “magic AI tutor”
+* Not locked to a single model
+* Not dependent on GPUs or paid APIs
+
+StudyWise is intentionally **boring, predictable, and controllable** - by design.
+
+---
+
+## Architecture Overview
+
+1. **Input Layer**
+
+   * PDF / DOCX / TXT ingestion
+   * Page-wise processing for PDFs
+
+2. **Text Extraction**
+
+   * Direct extraction for text-based documents
+   * OCR fallback for scanned pages (Tesseract + optional OpenCV preprocessing)
+
+3. **Text Processing**
+
+   * Normalization
+   * Noise reduction
+   * Chunking (LLM-safe sizes)
+
+4. **LLM Adapter Layer**
+
+   * Unified interface for:
+
+     * Cloud APIs (API key based)
+     * Local models (HTTP endpoints)
+   * No SDK lock-in
+
+5. **Prompt Engine**
+
+   * Exam-focused prompt templates
+   * Deterministic output formatting
+
+6. **UI Layer**
+
+   * Native Windows UI
+   * File selection
+   * LLM configuration
+   * Output viewer
 
 ---
 
 ## Design Decisions
 
-- **Local-first LLM usage** to avoid unnecessary data sharing
-- **Page-level summaries** instead of whole-document summaries to maintain structure
-- **Explicit OCR fallback** rather than assuming clean input
-- Minimal but reliable feature set, optimized for correctness and clarity
+* **Local-first by default**
+  Users control their data and models.
+
+* **LLM-agnostic architecture**
+  Avoids vendor lock-in and future-proofs the app.
+
+* **Exam-oriented outputs**
+  Prioritizes practical revision over generic summaries.
+
+* **Minimal feature surface**
+  Fewer features, higher reliability.
 
 ---
 
 ## Limitations
 
-- OCR accuracy depends on scan quality
-- Large PDFs may require more processing time
-- Output quality depends on the selected local language model
+* OCR quality depends on scan quality
+* Output quality depends on the selected LLM
+* Large documents may take longer to process
 
-These trade-offs were made intentionally to keep the system robust and understandable within a limited development window.
+These trade-offs are intentional to keep the system understandable and robust.
 
 ---
 
-## Future Work
+## Website
 
-- Layout-aware OCR and table handling
-- Section-level semantic grouping
-- Export integrations (Markdown, Notion)
-- Multi-language OCR support
-- User progress tracking
+The project website is hosted via **GitHub Pages** and is used to:
+
+* Explain the product
+* Showcase screenshots
+* Provide Windows downloads
+* Link the source repository
+
+No backend services are used.
 
 ---
 
 ## Demo
 
-will be up shortly
+Demo screenshots and a short walkthrough will be added soon.
+
 ---
 
 ## Author
 
-Ashwin  
-Built for DUHacks 5.0
+**Ashwin**
+Built for **DUHacks 5.0**
+
+---
