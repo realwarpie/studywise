@@ -1,6 +1,6 @@
-# SmartStudy
+# StudyWise
 
-SmartStudy is a local-first application that converts **normal and scanned PDFs** into structured summaries, generated quizzes, and a short study plan.
+StudyWise is a local-first application that converts **normal and scanned PDFs** into structured summaries, generated quizzes, and a short study plan.
 
 It is designed for real academic material - including scanned lecture notes and handouts - where most summarization tools fail.
 
@@ -8,7 +8,7 @@ It is designed for real academic material - including scanned lecture notes and 
 
 ## Overview
 
-SmartStudy accepts a PDF, automatically detects whether it contains selectable text or scanned images, applies OCR when required, and processes the content page-by-page using a local language model.
+StudyWise accepts a PDF, automatically detects whether it contains selectable text or scanned images, applies OCR when required, and processes the content page-by-page using a local language model.
 
 Each page is summarized independently to preserve structure and context. The generated notes are then used to create quiz questions and a simple adaptive study plan.
 
