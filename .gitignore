@@ -1,41 +1,23 @@
-# ---- Python ----
+# Python
 __pycache__/
-*.py[cod]
+*.pyc
+*.pyo
 *.pyd
-*.so
+*.log
 
-# ---- Virtual environments ----
+# Venv
 .venv/
 venv/
-env/
 
-# ---- Environment variables ----
-.env
-.envrc
+# Build artifacts
+build/
+dist/
+*.spec
 
-# ---- Streamlit ----
-.streamlit/
-
-# ---- OCR / temp files ----
-*.png
-*.jpg
-*.jpeg
-*.tiff
-
-# ---- Logs / caches ----
-*.log
-.cache/
-.pytest_cache/
-.mypy_cache/
-
-# ---- OS ----
-.DS_Store
-Thumbs.db
-
-# ---- IDEs ----
+# IDE
 .vscode/
 .idea/
 
-# ---- Demo assets (generated) ----
-demo/
-assets/screenshots/
+# OS
+.DS_Store
+Thumbs.db
