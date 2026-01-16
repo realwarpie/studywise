@@ -1,5 +1,3 @@
----
-
 # StudyWise
 
 StudyWise is a **local-first Windows application** that helps students turn their study material into **exam-ready questions and revision content** using language models of their choice.
