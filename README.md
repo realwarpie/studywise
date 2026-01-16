@@ -113,8 +113,6 @@ The application can be downloaded and run directly without an installer.
 ## Project Status
 
 * Early release (v0.1.0)
-* Actively developed
-* Built for DUHacks 5.0
 
 ---
 
