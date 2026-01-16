@@ -148,6 +148,10 @@ html.dark-mode {
       font-weight: 600;
       font-size: 13px;
       transition: all 0.3s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
     html.dark-mode .download-btn {
@@ -165,7 +169,20 @@ html.dark-mode {
       .container { padding: 0 24px; }
     }
 
-    section { padding: 100px 0; border-bottom: 1px solid var(--border); }
+    section {
+      padding: 100px 0;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-primary);
+    }
+
+    /* Subtle alternating background for visual separation */
+    section:nth-of-type(even) {
+      background: var(--bg-secondary);
+    }
+
+    html.dark-mode section:nth-of-type(even) {
+      background: var(--bg-secondary);
+    }
     section:last-of-type { border-bottom: none; }
 
     .hero-wrapper {
@@ -782,6 +799,7 @@ html.dark-mode {
       cursor: pointer;
       transition: all 0.3s;
       display: inline-block;
+      text-decoration: none;
     }
 
     html.dark-mode .btn-white {
@@ -850,8 +868,8 @@ html.dark-mode {
           <a href="#features">Features</a>
           <a href="#process">Process</a>
           <a href="#faq">FAQ</a>
-          <button class="theme-toggle" onclick="document.documentElement.classList.toggle('dark-mode'); localStorage.setItem('theme', document.documentElement.classList.contains('dark-mode') ? 'dark' : 'light');">🌙</button>
-          <button class="download-btn">Download</button>
+          <button class="theme-toggle" onclick="document.documentElement.classList.toggle('dark-mode'); localStorage.setItem('theme', document.documentElement.classList.contains('dark-mode') ? 'dark' : 'light');" aria-label="Toggle dark mode">🌙</button>
+          <a class="download-btn" href="https://github.com/realwarpie/studywise/releases/download/v0.1.0/StudyWise.exe" target="_blank" rel="noopener noreferrer" aria-label="Download StudyWise for Windows">Download</a>
         </nav>
       </div>
     </div>
@@ -863,14 +881,14 @@ html.dark-mode {
       <div class="hero-wrapper">
         <div class="fade-in">
           <h1>Better notes,<br><span class="hero-highlight">better grades</span></h1>
-          <p>Stop fighting with messy PDFs and scribbled lecture notes. Upload anything. We clean it up, organize it, and turn it into actual study materials in seconds.</p>
+          <p>Stop fighting with messy PDFs and scribbled lecture notes. Upload anything — PDFs, images, or DOCX. StudyWise (PySide6 GUI) cleans, organizes, and turns them into study guides, flashcards and quizzes in seconds.</p>
           <div class="hero-buttons">
-            <button class="btn btn-primary">Download</button>
-            <button class="btn btn-secondary">Learn more</button>
+            <a class="btn btn-primary" href="https://github.com/realwarpie/studywise/releases/download/v0.1.0/StudyWise.exe" target="_blank" rel="noopener noreferrer" aria-label="Download StudyWise for Windows">Download</a>
+            <a class="btn btn-secondary" href="#features">Learn more</a>
           </div>
         </div>
         <div class="hero-visual fade-in delay-1">
-          <div class="mock-window">
+          <div class="mock-window" role="img" aria-label="StudyWise app mockup">
             <div class="mock-header">
               <div class="mock-dot"></div>
               <div class="mock-dot"></div>
@@ -896,43 +914,43 @@ html.dark-mode {
           <div class="feature-icon">
             <svg width="28" height="28" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
           </div>
-          <h3>Smart parsing</h3>
-          <p>Upload PDFs, images, or Word docs. Automatic OCR handles scanned pages. Clean extraction in seconds.</p>
+          <h3>Document processing</h3>
+          <p>PDFs (text or scanned), PNG/JPEG images, and DOCX — OCR, clean & normalize text, handle batches, show file sizes and parsing progress.</p>
         </div>
         <div class="feature">
           <div class="feature-icon">
             <svg width="28" height="28" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
           </div>
-          <h3>AI summaries</h3>
-          <p>Pick any LLM. Get organized, concise study notes from chaotic lecture materials instantly.</p>
+          <h3>AI integration</h3>
+          <p>Works with local Ollama or cloud providers (e.g. Google Gemini). Configure models and settings in the app for privacy or power when needed.</p>
         </div>
         <div class="feature">
           <div class="feature-icon">
             <svg width="28" height="28" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
           </div>
-          <h3>Auto quizzes</h3>
-          <p>Generate practice questions and flashcard decks automatically. Find weak areas fast.</p>
+          <h3>Auto quizzes & flashcards</h3>
+          <p>Generate flashcards and practice quizzes automatically. Quiz mode reveals answers progressively and tracks score.</p>
         </div>
         <div class="feature">
           <div class="feature-icon">
             <svg width="28" height="28" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
           </div>
-          <h3>Your privacy</h3>
-          <p>Runs locally by default. Your files stay on your machine unless you choose a cloud LLM.</p>
+          <h3>Privacy-first</h3>
+          <p>Runs locally by default (PySide6). Files stay on your machine unless you choose a cloud LLM — you stay in control.</p>
         </div>
         <div class="feature">
           <div class="feature-icon">
             <svg width="28" height="28" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
           </div>
-          <h3>Flexible LLM</h3>
-          <p>OpenAI, Gemini, local Llama—pick whatever you want. Never locked into one provider.</p>
+          <h3>Flexible models</h3>
+          <p>Bring any model you prefer — local Llama/Ollama, OpenAI, Gemini. Configure model settings in the settings dialog.</p>
         </div>
         <div class="feature">
           <div class="feature-icon">
             <svg width="28" height="28" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5"></path><path d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8"></path></svg>
           </div>
-          <h3>Export free</h3>
-          <p>Markdown, JSON, Anki decks, Notion, Obsidian. Use your notes in any tool you prefer.</p>
+          <h3>Export options</h3>
+          <p>Export notes as Markdown/Text, flashcards to Anki .apkg, or copy JSON/Markdown to clipboard — use your notes where you want.</p>
         </div>
       </div>
     </div>
@@ -984,7 +1002,7 @@ html.dark-mode {
               <div class="reason-check">✓</div>
               <div>
                 <h4>Privacy first</h4>
-                <p>Everything runs locally. Your study materials are yours alone.</p>
+                <p>Everything runs locally by default. Your study materials are yours alone.</p>
               </div>
             </div>
             <div class="reason">
@@ -998,7 +1016,7 @@ html.dark-mode {
               <div class="reason-check">✓</div>
               <div>
                 <h4>Fast as hell</h4>
-                <p>From messy notes to polished study pack in literally seconds.</p>
+                <p>From messy notes to polished study pack in seconds (depending on model and file size).</p>
               </div>
             </div>
             <div class="reason">
@@ -1029,7 +1047,7 @@ html.dark-mode {
             <span class="faq-toggle">▼</span>
           </div>
           <div class="faq-content">
-            <p class="faq-text">Yes. Runs 100% locally by default. You only need internet if you pick a cloud LLM. OCR and everything else? Totally offline.</p>
+            <p class="faq-text">Yes. Runs 100% locally by default. You only need internet if you pick a cloud LLM. OCR and everything else can run offline.</p>
           </div>
         </div>
         <div class="faq">
@@ -1038,7 +1056,7 @@ html.dark-mode {
             <span class="faq-toggle">▼</span>
           </div>
           <div class="faq-content">
-            <p class="faq-text">Any LLM. OpenAI, Gemini, local Llama, Mistral—whatever you want. Bring your own, we don't force anything.</p>
+            <p class="faq-text">Local (Ollama, Llama) and cloud models (Google Gemini, OpenAI). You can configure the model and settings inside the app; cloud usage is billed by the provider.</p>
           </div>
         </div>
         <div class="faq">
@@ -1047,7 +1065,7 @@ html.dark-mode {
             <span class="faq-toggle">▼</span>
           </div>
           <div class="faq-content">
-            <p class="faq-text">PDF (text or scanned), PNG/JPEG images, DOCX files. Batch uploads are supported. All processed the same way.</p>
+            <p class="faq-text">PDF (text or scanned), PNG/JPEG images, DOCX files. Batch uploads are supported and processed the same way.</p>
           </div>
         </div>
         <div class="faq">
@@ -1056,7 +1074,7 @@ html.dark-mode {
             <span class="faq-toggle">▼</span>
           </div>
           <div class="faq-content">
-            <p class="faq-text">Your files stay on your machine. We never upload or store anything unless you explicitly send data to a cloud LLM.</p>
+            <p class="faq-text">Your files stay on your machine. We never upload or store anything unless you explicitly send data to a cloud LLM. You can always use local models for full privacy.</p>
           </div>
         </div>
         <div class="faq">
@@ -1065,7 +1083,7 @@ html.dark-mode {
             <span class="faq-toggle">▼</span>
           </div>
           <div class="faq-content">
-            <p class="faq-text">Yes. Markdown, JSON, native Anki decks, Notion, Obsidian—pick whatever format you need.</p>
+            <p class="faq-text">Yes. Markdown, JSON, native Anki .apkg export, Notion, Obsidian — pick the format you need.</p>
           </div>
         </div>
         <div class="faq">
@@ -1074,7 +1092,7 @@ html.dark-mode {
             <span class="faq-toggle">▼</span>
           </div>
           <div class="faq-content">
-            <p class="faq-text">Free. Download and use it. No hidden costs or trials. Cloud LLMs? You pay them directly, not us.</p>
+            <p class="faq-text">Free. Download and use it. Cloud LLM API usage (if you choose) is billed by the provider you select.</p>
           </div>
         </div>
       </div>
@@ -1087,23 +1105,21 @@ html.dark-mode {
       <div class="cta fade-in">
         <h2>Ready?</h2>
         <p>Download StudyWise for Windows. No sign-ups. No trials. Just better notes and better grades.</p>
-        <button class="btn-white">Download Now</button>
+        <a class="btn-white" href="https://github.com/realwarpie/studywise/releases/download/v0.1.0/StudyWise.exe" target="_blank" rel="noopener noreferrer" aria-label="Download StudyWise for Windows">Download Now</a>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <p>Built by Ashwin for DUHacks 5.0. © 2026 StudyWise</p>
+    <p>Built by Ashwin for DUHacks 5.0. © <span id="year">2026</span> StudyWise</p>
   </footer>
 
   <script>
-    // Dark mode toggle
+    // Dark mode toggle: respect saved choice or system preference (fixed default bug)
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    // Set dark mode by default
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark) || !savedTheme) {
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
       document.documentElement.classList.add('dark-mode');
     }
 
@@ -1127,11 +1143,8 @@ html.dark-mode {
       });
     });
 
-    // Year
-    document.querySelectorAll('footer p').forEach(p => {
-      p.innerHTML = p.innerHTML.replace('2026', new Date().getFullYear());
-    });
+    // Update year dynamically
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
-
