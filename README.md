@@ -14,8 +14,6 @@ It is built to be **fast, offline-capable**, and completely free from accounts, 
 
 ![StudyWise Screenshot](./assets/screenshot.png)
 
-> 📌 Replace this image with a real screenshot of the app UI  
-> Recommended size: **1280×800** or similar
 
 ---
 
