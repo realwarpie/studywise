@@ -14,6 +14,19 @@ It is built to be **fast, offline-capable**, and completely free from accounts, 
 
 ![StudyWise Screenshot](./assets/screenshot.png)
 
+## Demo Video
+
+Short product walkthrough showcasing the StudyWise workflow
+
+Watch the demo:
+![StudyWise Video](./assets/video.mp4)
+
+The video demonstrates:
+Document import
+Note generation
+Flashcards & quiz mode
+Offline local AI workflow
+
 
 ---
 
@@ -82,6 +95,32 @@ StudyWise is designed with a **local-first** philosophy.
 - No telemetry, analytics, or user accounts
 - Internet access is only required if a cloud-based AI model is explicitly selected
 - Fully functional offline workflow with local models
+
+---
+
+Installation & Requirements
+System Requirements
+
+Windows (x64)
+
+Internet connection only if using cloud AI models
+
+OCR Requirement (Important)
+
+StudyWise relies on Tesseract OCR for processing scanned PDFs and images.
+
+⚠️ You must install Tesseract OCR separately for OCR features to work.
+
+Download Tesseract OCR (Windows):
+https://github.com/UB-Mannheim/tesseract/wiki
+
+During installation:
+
+Make sure Tesseract is added to PATH
+
+Restart your system after installation
+
+If Tesseract is not installed, text-based PDFs will still work, but scanned documents and images will not be processed.
 
 ---
 
