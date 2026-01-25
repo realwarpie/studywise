@@ -19,7 +19,7 @@ It is built to be **fast, offline-capable**, and completely free from accounts, 
 Short product walkthrough showcasing the StudyWise workflow
 
 Watch the demo:
-![StudyWise Video](./assets/video.mp4)
+[![StudyWise Video](./assets/video.mp4)](https://youtu.be/xNIhd7Tf3Uk)
 
 The video demonstrates:
 Document import
