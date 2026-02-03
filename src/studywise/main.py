@@ -3,6 +3,7 @@ import os
 
 from studywise.extractor.pdf_extractor import extract_text_from_pdf
 from studywise.extractor.image_extractor import extract_text_from_image
+from studywise.extractor.docx_extractor import extract_text_from_docx
 from studywise.cleaner.text_cleaner import clean_text
 from studywise.ai.summarizer import summarize_text
 
@@ -16,6 +17,11 @@ def run(file_path: str) -> str:
         raw_text = extract_text_from_pdf(file_path)
     elif file_path.lower().endswith((".png", ".jpg", ".jpeg")):
         raw_text = extract_text_from_image(file_path)
+    elif file_path.lower().endswith(".docx"):
+        raw_text = extract_text_from_docx(file_path)
+    elif file_path.lower().endswith(".txt"):
+        with open(file_path, "r", encoding="utf-8") as f:
+            raw_text = f.read()
     else:
         raise ValueError("Unsupported file type")
 

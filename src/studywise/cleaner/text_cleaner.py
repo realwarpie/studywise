@@ -6,9 +6,10 @@ def clean_text(text: str) -> str:
     text = text.replace("â€“", "-")
     text = text.replace("â€™", "'")
 
-    # Normalize spacing
-    text = re.sub(r"\s+", " ", text)
+    # Normalize spacing while preserving paragraph breaks
+    text = re.sub(r"\r\n?", "\n", text)
     text = re.sub(r"\n\s*\n", "\n\n", text)
+    text = re.sub(r"[ \t]+", " ", text)
 
 
     # Restore newlines around file separators
