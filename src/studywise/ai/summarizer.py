@@ -8,12 +8,14 @@ def chunk_text(text: str, max_chars: int = 3500) -> list[str]:
     """
     chunks = []
 
+    has_file_markers = "===== FILE:" in text
     for block in text.split("===== FILE:"):
         block = block.strip()
         if not block:
             continue
 
-        block = "===== FILE:" + block
+        if has_file_markers:
+            block = "===== FILE:" + block
 
         if len(block) <= max_chars:
             chunks.append(block)
